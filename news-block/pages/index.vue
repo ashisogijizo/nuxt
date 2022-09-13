@@ -56,6 +56,9 @@ export default {
     max-width: 400px;
     padding: 5px;
     text-decoration: none;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
   .preview-img {
     object-fit: cover;
@@ -66,5 +69,6 @@ export default {
     padding: 10px;
     border-top: none;
     transition: .2s ease-out;
+    height: 100%;
   }
 </style>
