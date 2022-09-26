@@ -16,17 +16,18 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex';
 export default {
-  async asyncData({$axios}) {
-    const info = await $axios.$get('https://api.runsim.ru/api/main?language=ru')
-    const articles = info.news
-    return {
-      articles
+  computed: {
+    ...mapState(['articles'])
+  },
+  async fetch({store, from}) {
+    if(!from) {
+      await store.dispatch('loadAllArticles')
     }
   },
   data() {
     return {
-      news: [],
     }
   }
 }

@@ -1,24 +1,24 @@
 <template>
   <div class="container">
     <article class="article">
-        <h1>{{post.title}}</h1>
-        <p :style="'color:' + post.category.color">{{post.category.title}}</p>
-        <div v-html="post.content"></div>
+        <h1>{{title}}</h1>
+        <p :style="`color: ${category.color}`">{{category.title}}</p>
+        <div v-html="post"></div>
     </article>
     <nuxt-link class="home-link" to="/">На главную</nuxt-link>
   </div>
 </template>
 <script> 
+import { mapState } from 'vuex';
 export default {
-   async asyncData({params, $axios}) {
-    const post = await $axios.$get('https://api.runsim.ru/api/news/card/'+ params.slug + '?language=ru')
-    return {
-      post
-    }
+  computed: {
+    ...mapState(['post', 'content', 'title', 'category', 'slug'])
+  },
+   async fetch({store, params}) {
+      await store.dispatch('loadPost', {postSlug: params.slug});
   },
   data() {
     return {
-      
     }
   }
 }
