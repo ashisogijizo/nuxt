@@ -21,8 +21,8 @@ export default {
   computed: {
     ...mapState(['articles'])
   },
-  async fetch({store, from}) {
-    if(!from) {
+  async asyncData({store}) {
+    if(store.state.articles.length == 0) {
       await store.dispatch('loadAllArticles')
     }
   },

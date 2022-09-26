@@ -14,8 +14,10 @@ export default {
   computed: {
     ...mapState(['post', 'content', 'title', 'category', 'slug'])
   },
-   async fetch({store, params}) {
+   async asyncData({store, params}) {
+    if(store.state.slug != params.slug) {
       await store.dispatch('loadPost', {postSlug: params.slug});
+    }
   },
   data() {
     return {
